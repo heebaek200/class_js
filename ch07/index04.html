@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>ch07 index04.html</h1>
+
+    <script>
+        let stock = 0;
+        console.log(stock || "재고 없음");
+
+        // Null 병합 연산자 (null과 undefined일 때만 기본값 반환)
+        console.log(stock ?? "재고 없음");
+
+        let discount = null;
+        console.log(discount ?? 0);
+
+        let comment = "";
+        console.log(comment || "댓글없음");
+        console.log(comment ?? "댓글없음");
+
+        let isAgree = false;
+        console.log(isAgree || true);
+        console.log(isAgree ?? true);
+
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>ch02 index04.html 파일</h1>
+
+    <script>
+
+        console.log("--------- 1. 자동 형 변환 ----------");
+        console.log(100 + 2);
+        console.log(100 + "2"); // + 연산에서만 문자로 변환되어 이어붙임이 됨
+        console.log(100 * "2");
+        console.log(100 - "2");
+        console.log(100 / "2");
+        console.log(100 % "2");
+        console.log(100 * "abc");
+
+        console.log("-------- 2. 수동 형 변환 -----------");
+        let priceText = "123";
+        let price = Number(priceText);
+        console.log(typeof priceText);
+        console.log(typeof price);
+        console.log(price + 100);
+        // 빈 문자열을 수동형변환하면?
+        console.log(Number(""));
+
+        console.log("-------- 3. 수동 형변환 숫자 -> 문자 ----------");
+        let count = 456;
+        let countText = String(count)
+        console.log(typeof count);
+        console.log(countText + "개 입니다");
+
+        console.log("-------- 4. 백엔드로부터의 응답은 거의 항상 문자열임에 주의 ----------");
+        let input1 = "10";
+        let input2 = "20";
+
+        console.log(input1 + input2);
+        console.log(Number(input1) + Number(input2));
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        img {
+            width: 120px;
+        }
+    </style>
+</head>
+<body>
+    <h1>ch09 index05.html</h1>
+
+    <h3>방법1 : HTML 속성에 직접 쓰기</h3>
+    <div class="row">
+        <img src="img1.png" alt="photo1" id="photo1">
+        <button onclick="togglePhoto1()">이미지토글1</button>
+        <button id="toggle-btn">이미지토글2</button>
+    </div>
+
+    <script>
+        let isFirst = true;
+        function togglePhoto1() {
+            
+            const $photo = document.getElementById("photo1");
+            if (isFirst) {
+                $photo.src = "img2.png";
+            } else {
+                $photo.src = "img1.png";
+            }
+
+            isFirst = ! isFirst;
+        }
+
+        console.log(" 방법 2 : addEventListener로 처리");
+
+        document.getElementById("toggle-btn").addEventListener("click", function() {
+            const $photo = document.getElementById("photo1");
+            if (isFirst) {
+                $photo.src = "img2.png";
+            } else {
+                $photo.src = "img1.png";
+            }
+            isFirst = ! isFirst;
+        });
+    </script>
+    
+</body>
+</html>

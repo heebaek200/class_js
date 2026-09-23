@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .highlight {
+            background-color: yellow;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>ch09 index04.html</h1>
+    <h2 id="title">hello world</h2>
+    <p id="message">원래 문장</p>
+    <div id="box"></div>
+
+    <button id="change-btn">내용 변경</button>
+    <button id="class-btn">강조 토글</button>
+    <button id="create-btn">요소 생성</button>
+    <button id="remove-btn">마지막 요소 삭제</button>
+
+    <script>
+
+        // 1. 조작할 요소를 미리 찾아서 변수에 담아두기
+        const titleEl   = document.getElementById("title");
+        const messageEl = document.getElementById("message");
+        const boxEl     = document.getElementById("box");
+
+        // 2. 내용 바꾸기 : textContent vs innerHtml
+        document.getElementById("change-btn").addEventListener("click", function() {
+            titleEl.textContent = "<li>안녕 자바스크립트</li>";
+
+            messageEl.innerHTML = "이 문장은 <strong>굵은 글자</strong>를 포함한다.";
+
+            // style로 css 속성 직접 바꾸기
+            titleEl.style.color = "blue";
+            titleEl.style.fontSize = "32px";
+        });
+
+        // 3. 클래스 바꾸기
+        document.getElementById("class-btn").addEventListener("click", function() {
+            messageEl.classList.toggle("highlight");
+        });
+
+        // 4. 요소를 만들어 붙이기
+        document.getElementById("create-btn").addEventListener("click", function() {
+            // 만들기 -> 내용채우기 -> 부모에 붙이기
+            const $newItem = document.createElement("div");
+            $newItem.textContent = "동적으로 생성된 div";
+            $newItem.style.marginTop = "8px";
+            $newItem.style.padding = "8px";
+            $newItem.style.backgroundColor = "red";
+
+            boxEl.append($newItem);
+        });
+
+        // 5. 요소 지우기
+        document.getElementById("remove-btn").addEventListener("click", function() {
+            const lastItem = boxEl.lastElementChild;
+            lastItem && lastItem.remove();
+        });
+
+
+    </script>
+</body>
+</html>

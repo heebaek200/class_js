@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>ch02 - index01.html 파일</h1>
+
+    <script>
+        // 1. let : 변경이 가능한 값을 담는 상자
+        let username = "홍길동";
+        console.log(username);
+
+        username = "티모";  // 변수는 값을 변경할 수 있다.
+        console.log(username);
+
+        // 2. const : 한 번 정하면 바뀌지 않는 값을 담는 상자 (상수)
+        const PI = 3.14;
+        console.log(PI);
+
+        // 내용 변경 불가 (index01.html:25 Uncaught TypeError: Assignment to constant variable.)
+        // PI = 3.14159;
+
+        // 한 페이지에서 같은 변수를 선언한다면? -  오류 발생
+        // let username = "다른사람";
+
+        // 유연한 타입
+        let anything = 100;
+        anything = "이제는 문자열";
+        console.log(anything);
+
+
+    </script>
+    
+</body>
+</html>

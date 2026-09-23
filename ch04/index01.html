@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>ch04 - index01.html</h1>
+
+    <script>
+        // 1. 객체없이 학생 자료구조 만들어보기
+        let student1Name = "홍길동";
+        let student1Age = 20;
+        let student1Major = "컴퓨터공학과";
+
+        // 2. 객체 리터럴 사용
+        const student1 = {
+            name : "홍길동",
+            age  : 20,
+            major: "컴퓨터공학과",
+        };
+
+        // 3. 속성 접근 점 표기법
+        console.log(student1);
+        console.log(student1.name);
+        console.log(student1.age);
+        console.log(student1.major);
+
+        // 4. 속성 접근 대괄호 표기법
+        console.log(student1);
+        console.log(student1["name"]);
+        console.log(student1["age"]);
+        console.log(student1["major"]);
+
+        // 키 값은 변수를 통할 수 있음
+        const keyName = "name";
+        console.log(student1[keyName]); // 변수에 담긴 키로 접근 가능하다.
+
+        // 5. 두 번쨰 학생의 정보 저장하려면 새로운 리터럴 작성 필요
+        const student2 = {
+            name : "장길산",
+            age  : 21,
+            major: "경영학과"
+        };
+        console.log(student2);
+
+        // 6. 없는 키에 접근해보기
+        console.log(student2.tel);
+
+        // 7. 객체 리터럴 생성 후에 없는 속성 만들어보기
+        student2.tel = "010-1234-1234";
+        console.log(student2);
+
+
+    </script>
+    
+</body>
+</html>

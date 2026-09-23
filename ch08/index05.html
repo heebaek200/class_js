@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        div:has(>#search-input) {
+            border: 1px solid #a5a5a5;
+            border-radius: 8px;
+        }
+        #search-input {
+            padding: 12px 16px;
+            border: none;
+            outline: none;
+            background: transparent;
+            border-right: 1px solid #a5a5a5;
+        }
+        #count {
+            padding: 10px 5px;
+        }
+
+        .card {
+            margin: 10px 0;
+            padding: 12px 16px;
+
+            border: 1px solid #ffcdcd;
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            transition:
+                background-color 0.2s ease;
+        }
+
+        .card:hover {
+            background-color: #fff5f5;
+        }
+
+        #detail {
+            margin-top: 20px;
+            padding: 18px 20px;
+
+            border: 1px solid #ddd;
+            border-radius: 12px;
+
+            background: #fafafa;
+        }
+
+        #detail.detail-rendering {
+            animation: detailFadeIn 0.4s ease-out;
+        }
+
+        #detail p {
+            margin: 8px 0 0;
+
+            color: #666;
+        }
+
+        @keyframes detailFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        <input type="text" id="search-input" placeholder="상품명 검색" />
+        <span id="count">5개</span>
+    </div>
+
+    <div id="product-list"></div>
+    <div id="detail">상품을 클릭하면 상세 정보가 표시됨</div>
+
+    <script>
+        // 1. 서버에서 데이터를 받았다고 가정. (상품목록)
+        const products = [
+            {id: 1, name: "무선마우스"   , price: 25_000, stock: 3 },
+            {id: 2, name: "기계식 키보드", price: 89_000, stock: 0 },
+            {id: 3, name: "모니터 받침대", price: 15_000, stock: 12},
+            {id: 4, name: "버티컬 마우스", price: 42_000, stock: 5},
+            {id: 5, name: "무선 키보드"  , price: 24_601, stock: 0},
+        ];
+
+        // 준비물
+        const searchInput = document.getElementById("search-input");
+        const productList = document.getElementById("product-list");
+        const countSpan   = document.getElementById("count");
+        const detail      = document.getElementById("detail");
+
+        // 2. 상품 하나를 카드 HTML로 바꾸는 함수
+        function makeCard(product) {
+            return `
+                <div class="card" data-id=${product.id}>
+                    <strong>${product.name}</strong> - ${product.price.toLocaleString()} 원
+                </div>
+            
+            `;
+        }
+
+        // 3. 검색어에 맞는 상품만 골라서 화면에 그리는 함수
+        function render(keyword) {
+            // filter : 이름에 검색어가 포함된 것만
+            const matched = products.filter((p) => {
+                return p.name.includes(keyword);
+            });
+
+            productList.innerHTML = matched.map(makeCard).join("");
+
+            // 결과가 없을 때
+            if (matched.length === 0) {
+                productList.innerHTML = `<p>${keyword}에 해당하는 상품이 없습니다.</p>`;
+            }
+
+            // 도전과제: 갯수 출력
+            countSpan.textContent = `${matched.length}개`;
+
+            
+            bindListenerForCard();
+        }
+
+        function bindListenerForCard() {
+            const productCards = document.getElementsByClassName("card");
+            
+            for (const element of productCards) {
+                
+                // element.addEventListener("click", makeDetailProduct);
+                element.addEventListener("click", makeDetailProduct);
+            }
+        }
+
+        // 도전과제: 상품을 클릭하면 상세 정보 표시
+        function makeDetailProduct(event) {
+
+            console.log(event);
+
+            console.log("LOG");
+            const id = event.currentTarget.getAttribute("data-id");
+            const product = products.find(x => x.id === parseInt(id));
+
+            detail.classList.remove("detail-rendering");
+            detail.innerHTML = `
+                <strong>${product.name}</strong> - ${product.price.toLocaleString()} 원
+                <br>
+                <p>재고 : ${product.stock}</p>
+            `;
+            void detail.offsetWidth;
+            detail.classList.add("detail-rendering");
+        }
+        
+        render("");
+
+        searchInput.addEventListener("input", (event) => {
+            render(event.currentTarget.value);
+        });
+
+
+    </script>
+
+</body>
+</html>

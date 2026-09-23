@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>ch08 index01.html</h1>
+
+    <script>
+        const products = [
+            {id: 1, name: "무선마우스"   , price: 25_000, stock: 3 },
+            {id: 2, name: "기계식 키보드", price: 89_000, stock: 0 },
+            {id: 3, name: "모니터 받침대", price: 15_000, stock: 12},
+        ];
+
+        console.log("--------- 1. for 문으로 반복 -----------");
+        for (let i = 0 ; i< products.length ; i++) {
+            console.log(products[i].name);
+        }
+        console.log("--------- 2. forEach로 반복 -----------");
+        // 1. forEach는 안에서 콜백을 부를 때 항상 (요소, 인덱스, 배열자체)를 매개변수로 넘겨준다.
+        // 매개변수 이름은 상관없고 순서는 고정이다.
+        products.forEach((product) => {
+            console.log(`${product.name}`);
+        });
+
+        console.log("--------- 3. forEach 2번째 매개변수 -----------");
+        products.forEach((product, index) => {
+            console.log(`${index+1} ${product.name}`);
+        });
+
+        console.log("--------- 4. forEach는 return이 없다. -----------");
+        const result = products.forEach((p) => p.name);
+        console.log(result);
+
+        console.log("--------- 5. 활용. 합계 구하기. -----------");
+        let totalStock = 0;
+        products.forEach((p) => {
+            totalStock = totalStock + p.stock;
+        });
+        console.log(totalStock);
+
+
+        
+    </script>
+    
+</body>
+</html>

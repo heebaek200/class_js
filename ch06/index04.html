@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        li {
+            margin-bottom: 5px;
+        }
+        /* 공통 기본 스타일 reset */
+        button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px; /* 모던한 라운드 값 */
+            border: none;
+            background: none;
+            cursor: pointer;
+            transition: all 0.25s ease; /* 부드러운 전환 효과 */
+            outline: none;
+            background-color: #4f46e5; /* 모던한 인디고 블루 */
+            color: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.1), 0 2px 4px -1px rgba(79, 70, 229, 0.06);
+        }
+        button:hover {
+            background-color: #4338ca; /* 호버 시 조금 더 어둡게 */
+            transform: translateY(-2px); /* 살짝 떠오르는 효과 */
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.2);
+            border-color: #4f46e5;
+        }
+        .clicked {
+            background-color: #90ffae;
+            color: black;
+        }
+        .clicked:hover {
+            background-color: #68bb7e;
+        }
+
+
+    </style>
+</head>
+<body>
+    <h1>ch06 index04.html</h1>
+
+    <ul>
+        <li><button id="btn1">1. 일반 함수 this는 이 버튼</button></li>
+        <li><button id="btn2">2. 화살표 함수 this는 window</button></li>
+        <li><button id="btn3">3. event.currentTartget는 어느 방법이라도 이 버튼</button></li>
+        <li><button class="count-btn">4. 눌린 횟수: 0</button></li>
+        <li><button class="count-btn">5. 눌린 횟수: 0</button></li>
+    </ul>
+
+    <script>
+        // 1. 일반 함수 핸들러: 브라우저가 "요소.핸들러()"처럼 호출하므로 this는 그 요소가 된다.
+        document.getElementById("btn1").addEventListener("click", function() {
+            console.log(this);
+            this.classList.toggle("clicked");
+        });
+
+        // 2. 화살표 함수 핸들러: this가 없어서 전역의 this인 window이다.
+        document.getElementById("btn2").addEventListener("click", () => {
+            console.log(this);
+            // this.classList.toggle("clicked");   > 오류 발생
+        });
+
+        // 3. events.currentTarget 사용
+        document.getElementById("btn3").addEventListener("click", (event) => {
+            console.log(event);
+            console.log(event.currentTarget);
+            
+            event.currentTarget.classList.toggle("clicked");
+        });
+
+        // 4. 같은 핸들러를 여러 버튼에 붙일 때 활용
+        const countButtons = document.querySelectorAll(".count-btn");
+        console.log(countButtons);
+        countButtons.forEach((button) => {
+            let count = 0;
+
+            button.addEventListener("click", (event) => {
+                count++;
+                event.currentTarget.textContent = "눌린 횟수 : " + count;
+            });
+        })
+
+
+    </script>
+
+</body>
+</html>

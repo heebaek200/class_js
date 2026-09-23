@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>ch03 index01</h1>
+
+    <script>
+        // 1. 전역 스코프
+        const companyName = "코딩상사";
+
+        function printTeam() {
+            // 2. 함수 스코프
+            const teamName = "개발팀";
+        
+            if (true) {
+                // 3. 블록 스코프
+                const meetingMemo = "회의 메모";
+
+                // 지역에서는 바깥 변수에 접근가능
+                console.log(companyName);
+                console.log(teamName);
+                console.log(meetingMemo);
+            }
+
+            //console.log(meetingMemo);
+        }
+
+        console.log("------- 함수 밖 -------");
+        console.log(companyName);
+
+        // 테스트 함수 호출
+        printTeam();
+
+        console.log("---------------------------------------------------");
+        const level = "전역";
+
+        function  showLevel() {
+            const level = "함수";
+
+            // ?? 어느쪽이 실행될까?
+            console.log(level);
+        }
+
+        showLevel();
+
+    </script>
+    
+</body>
+</html>

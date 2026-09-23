@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>ch09 index02.html</h1>
+    <div id="notice">아이디로 접근</div>
+    <div class="item">클래스1</div>
+    <div class="item">클래스2</div>
+    
+    <p>태그 이름 1</p>
+    <p>태그 이름 2</p>
+
+
+    <script>
+        // 중요 - 요소에 접근하는 5가지 방법
+
+        console.log("#### 1. id로 찾기 : 요소 단 하나");
+        const notice = document.getElementById("notice");
+        console.log(notice);
+        console.log(typeof notice);
+
+        console.log("#### 2. class로 찾기 : HTMLCollection 자료구조에 여러 요소가 반환됨");
+        const itemsByClass = document.getElementsByClassName("item");
+        console.log(itemsByClass);
+        console.log(typeof itemsByClass);
+
+        console.log("#### 3. tag이름으로 찾기 : HTMLCollection 자료구조에 여러 요소가 반환됨");
+        const pElements = document.getElementsByTagName("p");
+        console.log(pElements);
+        console.log(typeof pElements);
+
+        console.log("#### 4. CSS 선택자로 하나 찾기");
+        const firstItem = document.querySelector(".item");
+        console.log(firstItem);
+        console.log(typeof firstItem);
+
+        const noticeEl = document.querySelector("#notice");
+        console.log(noticeEl);
+
+        console.log("#### 5. CSS 선택자로 모두 찾기 : NodeList 자료구조에 반환됨");
+        const allItems = document.querySelectorAll(".item");
+        console.log(allItems);
+        console.log(allItems.length);
+
+        // 6. 실험해보기 - 없는 요소를 읽어보기
+        console.log(document.getElementById("내이름"));
+        console.log(document.getElementsByClassName("내클래스"));
+        console.log(document.querySelectorAll("[data-id]"));
+
+        // 위의 결과를 토대로 방어적 코드 작성해보기
+        const $nothing = document.getElementById("nothing");
+        $nothing && ($nothing.textContent = "요소");
+
+    </script>
+</body>
+</html>

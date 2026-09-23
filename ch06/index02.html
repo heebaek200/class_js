@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>ch06 index02.html</h1>
+
+    <script>
+        // 콜백 안에서 this가 window를 가르키는 현상
+        const timer = {
+            seconds: 3,
+            label  : "요리 타이머",
+            start  : function() {
+                console.log(this.label + " 시작 " + this.seconds + "초");
+
+                setTimeout(function() {
+                    console.log(this.label + " 종료 ");         // > undefined 종료 
+                }, 3000);
+            }
+        };
+        timer.start();
+
+        console.log("----- forEach에서도 발생 -----");
+        const shop = {
+            name: "코딩 상점",
+            products: ["마우스", "키보드", "모니터"],
+            printAll: function() {
+                console.log("[[[" + this.name + "]]]");
+                this.products.forEach(function(product) {
+                    console.log(this.name + " - " + product);
+                });
+            }
+        };
+        shop.printAll();
+
+
+        console.log("----- 해결방법1 (old style): this를 다른 변수(self 등)에 담아두기 -----");
+        const shop2 = {
+            name: "코딩 상점",
+            products: ["마우스", "키보드", "모니터"],
+            printAll: function() {
+
+                const self = this;
+
+                console.log("[[[" + self.name + "]]]");
+                this.products.forEach(function(product) {
+                    console.log(self.name + " - " + product);
+                });
+            }
+        };
+        shop2.printAll();
+        
+    </script>
+
+</body>
+</html>

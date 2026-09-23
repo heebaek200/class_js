@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>ch09 index03.html</h1>
+    
+    <ul id="fruit-list">
+        <li class="fruit">사과</li>
+        <li class="fruit">버내너</li>
+    </ul>
+
+    <script>
+        // 1. 같은 요소들을 두가지 방법으로 찾아보자.
+        const liveList = document.getElementsByClassName("fruit");  // : HTMLCollection
+        const staticList = document.querySelectorAll(".fruit");     // : NodeList
+
+        console.log(liveList.length);
+        console.log(staticList.length);
+
+        // 2. 새 요소 하나 추가하기
+        const newFruit = document.createElement("li");
+        newFruit.className = "fruit";
+        newFruit.textContent = "포도";
+        
+        document.getElementById("fruit-list").append(newFruit);
+
+        // 3. 추가한 뒤 두 결과의 개수를 다시 확인
+
+        console.log(liveList.length);       // > 3
+        console.log(staticList.length);     // > 2
+
+        // 4. 다시 확인
+        console.log(document.querySelectorAll(".fruit").length);    // > 3
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>ch07 index02.html</h1>
+
+    <script>
+
+        // 1. boolean이 아닌 값도 조건식에 들어갈 수 있다.
+        if (456) {
+            console.log("456은 참으로 평가된다.");
+        } else 
+
+        if (undefined) {
+            console.log("undefined는 거짓으로 평가가 된다.")
+        }
+
+        // Falsy한 값 7가지. 그 외는 대체로 Truthy
+        const falsy = [];
+        falsy.push(undefined);
+        falsy.push(null);
+        falsy.push(0);
+        falsy.push(NaN);
+        falsy.push(-0);
+        falsy.push("");
+        falsy.push(0n); // BigInt 타입의 0
+        falsy.push([].length);
+        falsy.push({}.length);
+
+        for (const f of falsy) {
+            if (!f)
+                console.log("「" + f + "」는 Falsy");
+        }
+
+        const truthy = [];
+        truthy.push("hello");
+        truthy.push("100");
+        truthy.push("-5");
+        truthy.push("0");
+        truthy.push([]);
+        truthy.push({});
+
+        for (const t of truthy) {
+            if (t)
+                console.log("「" + t + "」는 Truthy");
+        }
+
+        // 배열이 비었는지 확인하려면 배열 자체가 아니라 길이로 확인하기.
+
+        console.log("-------- 활용: 조건문을 짧게 ---------");
+        function showWriter1(post) {
+            if (post === undefined || post === null) {
+                console.log("게시글 정보가 없습니다.");
+                return;
+            }
+            console.log(post.writer);
+        }
+
+        showWriter1({writer: "김민수"});
+        showWriter1(undefined);
+
+        console.log("------- 가장 주의할 것: '0'과 빈문자열 -----------");
+
+        function showStock(stock) {
+            if (!stock) {
+                console.log("재고 정보 없음");
+                return;
+            } else {
+                console.log(`재고: ${stock}`);
+            }
+        }
+
+        showStock(5);
+        showStock(0);       // 재고 0을 기대했지만 '재고 정보 없음'으로 출력됨.
+
+    
+        function showStockSafe(stock) {
+            //if (stock === undefined || stock === null) {
+            if (Number.isNaN(stock)) {
+                console.log("재고 정보 없음");
+                return;
+            } else {
+                console.log(`재고: ${stock}`);
+            }
+        }
+
+        showStockSafe(5);
+        showStockSafe(0);       // 재고 0을 기대했지만 '재고 정보 없음'으로 출력됨.
+
+
+    </script>
+    
+</body>
+</html>

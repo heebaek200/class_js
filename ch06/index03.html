@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>ch06 index03.html</h1>
+
+    <script>
+
+        console.log("1. 콜백을 화살표 함수로 바꾸면 this 버그 해결 가능.");
+        const timer = {
+            seconds: 3,
+            label  : "요리 타이머",
+            start  : function() {
+                console.log(this.label + " 시작 " + this.seconds + "초");
+
+                setTimeout(() => {
+                    console.log(this.label + " 종료 ");         // > undefined 종료 
+                }, 3000);
+            }
+        };
+        timer.start();
+
+        console.log("2. forEach도 해결된다.");
+        const shop = {
+            name: "코딩 상점",
+            products: ["마우스", "키보드", "모니터"],
+            printAll: function() {
+                console.log("[[[" + this.name + "]]]");
+                this.products.forEach((product) => {
+                    console.log(this.name + " - " + product);
+                });
+            }
+        };
+        shop.printAll();
+
+        console.log("3. 주의! 메서드 자체를 화살표 함수로 만들지 말것.");
+        const wrongShop = {
+            name2: "잘못된 상점",
+            introduce: () => {
+                console.log("이름 : " + this.name2);
+            }
+        };
+        wrongShop.introduce();
+
+
+        console.log("4. 축약 메서드 문법");
+        const rightShop = {
+            name: "올바른 상점",
+            products: ["마우스", "키보드"],
+            introduce() {
+                console.log("이름 : " + this.name);
+            }
+        };
+        rightShop.introduce();
+
+
+    </script>
+
+</body>
+</html>

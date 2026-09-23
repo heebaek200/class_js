@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>ch06 index01.html</h1>
+
+
+    <script>
+        
+        console.log("----------- 1. 메서드로 호출하면 this는 점 앞의 객체이다. -------------");
+
+        const cat = {
+            name: "나비",
+            name2: "나비2",
+            introduce: function() {
+                console.log("제 이름은 " + this.name + "입니다.");
+            }
+        };
+
+        cat.introduce();
+
+        console.log("----------- 2. 같은 함수를 다른 객체에 붙이면 this도 바뀐다. -------------");
+
+        const dog = {
+            name: "초코",
+            introduce: cat.introduce
+        };
+
+        dog.introduce();    // > 제 이름은 초코입니다.
+
+        console.log("----------- 3. 그냥 호출하면 this는 window 객체이다. -------------");
+
+        const alone = cat.introduce;
+        alone();
+        // 주의: window.name은 ''으로 선점되어 있다.
+
+
+        console.log("----------- 4. new로 호출하면 this는 새로 만들어진 객체이다. -------------");
+        function Member(name) {
+            this.name = name;
+        }
+        const member1 = new Member("홍길동");
+        console.log(member1.name);
+
+        // 실험 만약 new라는 키워드를 사용 안하고 호출한다면?
+        const member2 = Member("이순신");
+        console.log(member2);
+        console.log(window.name);
+
+    </script>
+
+</body>
+</html>

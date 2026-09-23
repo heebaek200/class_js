@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>ch05 index01.html</h1>
+
+    <script>
+        // 1. 함수 선언문
+        function addNumber(a, b) {
+            const sum = a + b;
+            return sum;
+        }
+
+        // 2. 함수 호출
+        const result = addNumber(10, 20);
+        console.log(result);
+
+        // 3. 생성자 함수와의 차이 알아보기
+        function Person(firstName, lastName) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+        }
+
+        // 데이터 타입은 둘 다 function. 다른 점은 호출하는 방법차이 뿐이다.
+        console.log(typeof addNumber);
+        console.log(typeof Person);
+
+        const sum = addNumber(20, 20);
+        const person1 = new Person("길동", "홍");
+
+        console.log(sum);
+        console.log(person1);
+
+        // 실험1. return 없는 함수 호출에 대입연산자를 사용하면?
+        function sayHello() {console.log("안녕하세요?")}
+        const returned = sayHello();
+        console.log(returned);
+
+        // 실험2. return 키워드가 두개라면
+        function checkAge(age) {
+            if (age < 0) {
+                return "잘못된 나이";
+                // return 키워드를 만나는 함수가 끝난다.
+            } else {
+                return age + "세";
+            }
+            console.log("여기 결과가 찍힐까?");
+        }
+        console.log(checkAge(-5));
+        console.log(checkAge(25));
+
+        // 4. 매개 변수 기본값 설정
+        function greet(name = "손님") {
+            console.log(name + "님 환영합니다.");
+        }
+        greet();
+        greet("이순신");
+        
+
+    </script>
+    
+</body>
+</html>
