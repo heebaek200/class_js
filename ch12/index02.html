@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>ch12 index02.html</h1>
+    <button id="myButton">클릭</button>
+
+    <script>
+        // 1. button 요소에 접근
+        const buttonEl = document.getElementById("myButton");
+
+        // 2. onclick속성에 함수를 대입하여 핸들러를 등록한다.
+        buttonEl.onclick = function() {
+            alert("첫번째 핸들러");
+        };
+
+        // 3. 같은 속성에 다시 대입을 하면 앞의 핸들러는 바람과 함께 사라진다.
+        buttonEl.onclick = function() {
+            alert("두번쨰 핸들러");
+        }
+
+    </script>
+</body>
+</html>

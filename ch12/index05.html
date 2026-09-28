@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        button {
+            width: 100%;
+            cursor: pointer;
+
+            outline: none;
+            border: 1px solid rgb(87, 87, 87);
+
+            background-color: rgb(217, 191, 234);
+            padding: 10px 5px;
+            border-radius: 5px;
+
+            transition:
+                background-color 0.4s ease,
+        }
+
+        button:hover {
+            background-color: rgb(221, 205, 230);
+        }
+
+        .row {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+
+            gap: 10px;
+            margin: 10px 0;
+
+            max-width: calc(100% - 10px);
+        }
+        .row>.card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            flex: 1;
+            min-width: 100px;
+            aspect-ratio: 1;
+            border-radius: 5px;
+            border: 1px solid rgb(87, 87, 87);
+        }
+
+        .card {
+            background-color: lightblue;
+            opacity: 0;
+
+            cursor: pointer;
+
+
+            transform:
+                translateY(15px)
+                scale(0.7)
+                rotate(-4deg);
+
+            transition:
+                background-color 0.4s ease,
+                opacity 0.25s ease,
+                transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+        }
+        .card:hover {
+            background-color: rgb(228, 240, 244);
+        }
+
+        .card.shown {
+            opacity: 1;
+
+            transform:
+                translateY(0)
+                scale(1)
+                rotate(0deg);
+        }
+    </style>
+
+</head>
+<body>
+    <h1>ch12 index05.html - 동적 요소 추가하기</h1>
+
+    <div class="row">
+        <button id="add-button">+ 아이템 추가</button>
+        <!-- <button id="remove-button">아이템 삭제</button> -->
+    </div>
+    <div class="row" id="card-wrapper">
+        <span class="card shown">아이템 1</span>
+        <span class="card shown">아이템 2</span>
+        <span class="card shown">아이템 3</span>
+    </div>
+
+    <script>
+        // 요소
+        const elAddButton = document.getElementById("add-button");
+        const elCardWrapper = document.getElementById("card-wrapper");
+
+        // 카드 수 카운트
+        let no = elCardWrapper.querySelectorAll(".card").length;
+
+        // 카드를 눌렀을 때 사용할 콜백 함수
+        const removeButton = function(event) {
+            const elThisCard = event.target;
+            elThisCard.classList.remove("shown");
+        };
+
+        // 최초 생성 3 카드에 클릭 리스너
+        for (const elCard of elCardWrapper.querySelectorAll(".card")) {
+            elCard.addEventListener("click", removeButton);
+        }
+
+        // 추가 버튼을 눌렀을 때 카드를 생성
+        elAddButton.addEventListener("click", () => {
+            const elNewCard = document.createElement("span");
+            elNewCard.classList.add("card");
+            elNewCard.textContent = `아이템 ${++no}`;
+
+            elCardWrapper.append(elNewCard);
+
+            // 이후 카드에도 클릭 리스너
+            elNewCard.addEventListener("click", removeButton);
+
+            //elNewCard.classList.add("shown");
+            requestAnimationFrame(() => {
+                elNewCard.classList.add("shown");
+            });
+        });
+
+
+    </script>
+
+
+    <script>
+    </script>
+</body>
+</html>

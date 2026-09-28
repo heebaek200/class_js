@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        .box {
+            border: 1px solid black;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        
+
+    </style>
+</head>
+<body>
+    <h1>ch12 index04.html - 요소 숨기기 / 보이기</h1>
+    
+    <button id="btn1">Display 토글 (공간까지 사라짐)</button>
+    <button id="btn2">Visibility 토글 (공간은 남음)</button>
+
+    <div id="box2" class="box">내부 박스2 (Visibility 테스트)</div>
+    <div id="box1" class="box">내부 박스1 (Display 테스트)</div>
+    <div class="box">공간 표시 용 박스</div>
+
+    <script>
+        const btn1El = document.getElementById("btn1");
+        const btn2El = document.getElementById("btn2");
+        const box1El = document.getElementById("box1");
+        const box2El = document.getElementById("box2");
+
+        btn1El.addEventListener("click", () => {
+            box1El.style.display = (box1El.style.display == "none") ?  "block" : "none";
+        });
+
+        btn2El.addEventListener("click", () => {
+            box2El.style.visibility = (box2El.style.visibility == "hidden") ?  "visible" : "hidden";
+        });
+
+
+    </script>
+
+
+    <script>
+    </script>
+</body>
+</html>
