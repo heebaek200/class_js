@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #parent {
+            padding: 50px;
+            background-color: lightblue;
+            border: 3px solid black;
+            text-align: center;
+        }
+
+        #child {
+            background-color: lightsalmon;
+            padding: 15px 30px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>ch13 index01.html 파일 - 버블링 확인</h1>
+
+    <div id="parent">
+        이곳은 넓은 부모 영역입니다.
+        <br>
+        <button id="child">자식 버튼</button>
+    </div>
+    <script>
+        const parent = document.getElementById("parent");
+
+        // 부모 영역 하나에만 리스너를 등록한다.
+        parent.addEventListener("dblclick", (e) => {
+            console.log("이벤트 종류: ", e.type);
+            console.log("실제 클릭된 요소: ", e.target.id);
+            console.log("리스너가 달린 요소: ", e.currentTarget.id);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            padding: 20px;
+        }
+        ul {
+            list-style: none;
+            margin-top: 20px;
+            width: 300px;
+        }
+        li {
+            background-color: lightcyan;
+            border: 1px solid lightblue;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        button {
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>ch13 index04.html 파일</h1>
+
+    <button id="btnAdd">새 아이템 추가</button>
+
+    <ul id="itemList">
+        <li>기존 아이템 1 <button class="delete-btn">삭제</button></li>
+        <li>기존 아이템 2 <button class="delete-btn">삭제</button></li>
+        <li>기존 아이템 3 <button class="delete-btn">삭제</button></li>
+    </ul>
+
+    <script>
+        // 페이지가 로드된 시점의 삭제 버튼 3개 (NodeList 타입)
+        const deleteBtnList = document.querySelectorAll(".delete-btn");
+        const btnAddEl = document.querySelector("#btnAdd");
+        const itemListEl = document.querySelector("#itemList");
+        
+        // 중요
+        // 1. 이벤트 위임: 부모 요소 하나에만 리스너를 한 번 등록한다. (ul 태그)
+        itemListEl.addEventListener("click", e => {
+            // 클릭된 요소가 삭제 버튼일 때만 동작.
+            if (e.target.classList.contains("delete-btn")) {
+                // e.target.parentElement
+                e.target.closest("li").remove();
+            }
+        });
+
+        btnAddEl.addEventListener("click", () => {
+            const currentCount = itemListEl.children.length;
+
+            const newItem = document.createElement("li");
+            newItem.innerHTML = `기존 아이템 ${currentCount+1} <button class="delete-btn">삭제</button>`;
+
+            itemListEl.append(newItem);
+        });
+
+    </script>
+</body>
+</html>
