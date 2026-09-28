@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../reset.css">
+
+    <style>
+        /* 1단계: 리셋 + 전역 스타일 */
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #333;
+            padding: 20px;
+        }
+
+        /* 2단계: 레이아웃 */
+        .banner-container {
+            display: flex;
+            align-items: center;
+            width: 80%;
+            max-width: 600px;
+            margin: 50px auto;
+        }
+        .image-wrapper {
+            flex: 1;
+            height: 200px;
+            position: relative; /* 자식 position: absolute의 기준점 */
+            overflow: hidden;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* 3단게: 컴포넌트 스타일 */
+        .banner-container {
+            border: 2px solid #333;
+        }
+        .control-btn {
+            padding: 20px;
+            background: none;
+            border: none;
+            font-size: 20px;;
+        }
+
+        /* 4단계: 세부 조정 */
+        .image-wrapper img {
+            opacity: 0;
+            visibility: hidden;
+
+            transition: opacity .5s ease-in-out;
+        }
+
+        .image-wrapper img.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .control-btn {
+            cursor: pointer;
+
+            transition: transform .2s ease;
+        }
+
+        .control-btn:hover {
+            transform: scale(1.3);
+        }
+    </style>
+</head>
+<body>
+    <h1>ch16 index02.html - 배너 변경</h1>
+
+    <div class="banner-container">
+        <button class="control-btn prev-btn">&lt;</button>
+
+        <div class="image-wrapper">
+            <img src="https://picsum.photos/id/20/400/300" alt="">
+            <img src="https://picsum.photos/id/30/400/300" alt="">
+            <img class="active" src="https://picsum.photos/id/40/400/300" alt="">
+        </div>
+
+
+        <button class="control-btn next-btn">&gt;</button>
+
+
+        <script>
+            const prevButtton = document.querySelector(".prev-btn");
+            const nextButtton = document.querySelector(".next-btn");
+            const imageList = document.querySelectorAll(".image-wrapper img");
+
+            // 상태 변수 관리법: 현재 보이는 이미지의 인덱스, 화면은 항상 이 값을 따라간다.
+            let currentIndex = 2;
+            const imageCount = imageList.length;    // 3
+
+            // 1. 이전 버튼 리스너 등록
+            prevButtton.addEventListener("click", () => {
+                let newIndex = (currentIndex - 1 + imageCount) % imageCount;
+                
+                // 화면 갱신
+                updateBanner(newIndex);
+            });
+
+            // 2. 다음 버튼 리스너 등록
+            nextButtton.addEventListener("click", () => {
+                let newIndex = (currentIndex + 1) % imageCount;
+
+                // 화면 갱신
+                updateBanner(newIndex);
+            });
+
+            function updateBanner(newIndex) {
+                // 1. 현재 활성화된 img태그에서 active라는 클래스를 빼서 숨긴다.
+                // console.log(imageList);
+                // console.log(imageList[currentIndex]);
+                // console.log(imageList[currentIndex].classList);
+                imageList[currentIndex].classList.remove("active");
+
+                // 2. 상태 변수를 새 인덱스 번호로 교체한다.
+                currentIndex = newIndex;
+
+                // 3. 새 인덱스의 img에 active 클래스를 붙인다.
+                imageList[currentIndex].classList.add("active");
+            }
+        </script>
+    </div>
+</body>
+</html>
