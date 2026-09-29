@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>ch17 index01.html</h1>
+    
+    <script>
+        // 콜백 지옥
+        // 순차적인 비동기 작업을 처리하기 위해 과거에는 콜백을 중첩하여 사용했다.
+        setTimeout(function() {
+            console.log("A 작업 완료");                 // 2 (2s)
+            setTimeout(function() {
+                console.log("B 작업 완료");             // 3 (4s)
+                setTimeout(function() {
+                    console.log("C 작업 완료");         // 4 (6s)
+                }, 2000);
+            }, 2000);
+        }, 2000);
+
+        console.log("여기 코드는 언제 실행이 될까요?"); // 1
+
+
+    </script>
+</body>
+</html>
