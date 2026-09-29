@@ -1,0 +1,540 @@
+/* =========================
+   기본 설정
+========================= */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 48px 24px;
+
+    font-family:
+        "Pretendard",
+        "Noto Sans KR",
+        Arial,
+        sans-serif;
+
+    color: #4f4a57;
+
+    background:
+        radial-gradient(circle at top left, #f8e8ff 0, transparent 30%),
+        radial-gradient(circle at top right, #e4f4ff 0, transparent 28%),
+        radial-gradient(circle at bottom left, #e9fbe9 0, transparent 30%),
+        #fffaf5;
+}
+
+
+/* =========================
+   제목
+========================= */
+h1 {
+    margin: 0 0 32px;
+
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 800;
+    letter-spacing: -1.5px;
+
+    color: #61576c;
+}
+
+h2 {
+    margin-top: 36px;
+    margin-bottom: 14px;
+
+    font-size: 19px;
+    color: #756b7f;
+}
+
+
+/* =========================
+   버튼 공통
+========================= */
+button {
+    margin: 4px;
+    padding: 11px 18px;
+
+    border: 0;
+    border-radius: 14px;
+
+    font-size: 14px;
+    font-weight: 700;
+    color: #554f5b;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 12px rgba(80, 70, 90, 0.08);
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        filter 0.18s ease;
+}
+
+button:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 9px 18px rgba(80, 70, 90, 0.13);
+
+    filter: brightness(1.03);
+}
+
+button:active {
+    transform: translateY(0) scale(0.97);
+}
+
+
+/* =========================
+   HTTP 메서드별 파스텔 컬러
+========================= */
+#getBtn {
+    background-color: #cfe8ff;
+}
+
+#postBtn {
+    background-color: #d8f3dc;
+}
+
+#patchBtn {
+    background-color: #fff1c7;
+}
+
+#putBtn {
+    background-color: #e8dcff;
+}
+
+#deleteBtn {
+    background-color: #ffd6dc;
+}
+
+#listBtn {
+    background-color: #d9f3f0;
+}
+
+
+/* =========================
+   결과 출력창
+========================= */
+#resultDisplay {
+    min-height: 180px;
+    margin: 0;
+    padding: 22px;
+
+    overflow-x: auto;
+
+    border: 2px solid #eee5f2;
+    border-radius: 18px;
+
+    font-family:
+        "JetBrains Mono",
+        "Consolas",
+        monospace;
+
+    font-size: 14px;
+    line-height: 1.7;
+
+    color: #62596c;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fffdfd,
+            #faf7ff
+        );
+
+    box-shadow:
+        0 10px 24px rgba(110, 90, 120, 0.08);
+}
+
+
+/* =========================
+   할 일 목록
+========================= */
+#todoList {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+#todoList li {
+    position: relative;
+
+    padding: 16px 18px 16px 50px;
+
+    border: 1px solid #ece4ef;
+    border-radius: 16px;
+
+    color: #5f5866;
+
+    background: rgba(255, 255, 255, 0.75);
+
+    box-shadow:
+        0 6px 14px rgba(100, 90, 110, 0.06);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+
+/* 파스텔 체크 포인트 */
+#todoList li::before {
+    content: "";
+
+    position: absolute;
+    top: 50%;
+    left: 20px;
+
+    width: 12px;
+    height: 12px;
+
+    border-radius: 50%;
+
+    background: #bce8d7;
+
+    box-shadow:
+        0 0 0 5px rgba(188, 232, 215, 0.25);
+
+    transform: translateY(-50%);
+}
+
+#todoList li:hover {
+    transform: translateX(6px);
+
+    background-color: #fff6fb;
+
+    box-shadow:
+        0 9px 18px rgba(100, 90, 110, 0.1);
+}
+
+
+/* =========================
+   반응형
+========================= */
+@media (max-width: 700px) {
+
+    body {
+        padding: 28px 16px;
+    }
+
+    button {
+        width: calc(50% - 12px);
+    }
+
+    #listBtn {
+        width: calc(100% - 12px);
+    }
+
+    #resultDisplay {
+        min-height: 140px;
+        padding: 16px;
+
+        font-size: 13px;
+    }
+}
+
+#resultDisplay.shake {
+    animation: shake 0.35s ease;
+}
+
+@keyframes shake {
+    0%   { transform: translateX(0); }
+    20%  { transform: translateX(-6px); }
+    40%  { transform: translateX(6px); }
+    60%  { transform: translateX(-4px); }
+    80%  { transform: translateX(4px); }
+    100% { transform: translateX(0); }
+}
+
+/* =========================
+   TODO 목록
+========================= */
+#todoList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+
+    gap: 14px;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+
+/* TODO 카드 */
+.todo-item {
+    position: relative;
+
+    min-height: 130px;
+    padding: 20px;
+
+    border: 1px solid #eee5f2;
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #fff9fc
+        );
+
+    box-shadow:
+        0 8px 20px rgba(100, 90, 110, 0.08);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+/* 카드 위쪽 포인트 */
+.todo-item::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: 18px;
+
+    width: 50px;
+    height: 5px;
+
+    border-radius: 0 0 8px 8px;
+
+    background-color: #ffd6e7;
+}
+
+
+.todo-item:hover {
+    transform: translateY(-5px);
+
+    border-color: #dfd1e6;
+
+    box-shadow:
+        0 14px 28px rgba(100, 90, 110, 0.13);
+}
+
+
+/* 완료된 항목 */
+.todo-item.completed {
+    background:
+        linear-gradient(
+            135deg,
+            #f5fff8,
+            #eefbf3
+        );
+}
+
+.todo-item.completed::before {
+    background-color: #bde8cf;
+}
+
+
+/* 제목 */
+.todo-title {
+    display: block;
+
+    margin-bottom: 20px;
+
+    font-size: 16px;
+    line-height: 1.5;
+
+    color: #5f5866;
+}
+
+
+/* 완료된 제목 */
+.todo-item.completed .todo-title {
+    color: #7f8d84;
+    text-decoration: line-through;
+}
+
+
+/* 메타 정보 */
+.todo-meta {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 7px;
+}
+
+
+/* 공통 배지 */
+.todo-meta span {
+    padding: 5px 9px;
+
+    border-radius: 999px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    color: #746c7a;
+
+    background-color: #f0ebf3;
+}
+
+
+/* 완료 상태 */
+.todo-status.done {
+    color: #3e7b59;
+
+    background-color: #d8f3df;
+}
+
+
+/* 진행 상태 */
+.todo-status.pending {
+    color: #9a6a39;
+
+    background-color: #fff0cf;
+}
+
+
+/* 빈 목록 */
+.todo-empty {
+    padding: 40px;
+
+    border: 2px dashed #e4d8e8;
+    border-radius: 18px;
+
+    text-align: center;
+
+    color: #998fa0;
+
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+/* =========================
+   배경 동물 이모지
+========================= */
+.animal-background {
+    position: fixed;
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+    z-index: -1;
+}
+
+.animal-background span {
+    position: absolute;
+
+    font-size: 38px;
+
+    opacity: 0.18;
+
+    animation-name: animalFloat;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+
+/* 동물마다 위치와 속도를 다르게 지정 */
+.animal-background span:nth-child(1) {
+    top: 10%;
+    left: 5%;
+
+    animation-duration: 9s;
+}
+
+.animal-background span:nth-child(2) {
+    top: 20%;
+    left: 80%;
+
+    animation-duration: 12s;
+    animation-delay: -3s;
+}
+
+.animal-background span:nth-child(3) {
+    top: 40%;
+    left: 15%;
+
+    animation-duration: 11s;
+    animation-delay: -5s;
+}
+
+.animal-background span:nth-child(4) {
+    top: 65%;
+    left: 75%;
+
+    animation-duration: 14s;
+    animation-delay: -2s;
+}
+
+.animal-background span:nth-child(5) {
+    top: 75%;
+    left: 25%;
+
+    animation-duration: 10s;
+    animation-delay: -7s;
+}
+
+.animal-background span:nth-child(6) {
+    top: 30%;
+    left: 55%;
+
+    animation-duration: 13s;
+    animation-delay: -4s;
+}
+
+.animal-background span:nth-child(7) {
+    top: 85%;
+    left: 60%;
+
+    animation-duration: 15s;
+    animation-delay: -6s;
+}
+
+.animal-background span:nth-child(8) {
+    top: 55%;
+    left: 90%;
+
+    animation-duration: 11s;
+    animation-delay: -1s;
+}
+
+
+/* 둥둥 떠다니는 움직임 */
+@keyframes animalFloat {
+    0% {
+        transform:
+            translate(0, 0)
+            rotate(0deg);
+    }
+
+    25% {
+        transform:
+            translate(25px, -20px)
+            rotate(8deg);
+    }
+
+    50% {
+        transform:
+            translate(-15px, 15px)
+            rotate(-6deg);
+    }
+
+    75% {
+        transform:
+            translate(20px, 25px)
+            rotate(5deg);
+    }
+
+    100% {
+        transform:
+            translate(0, 0)
+            rotate(0deg);
+    }
+}
